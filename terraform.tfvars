@@ -1,6 +1,6 @@
 ## Improvement - need to pass unique tfvars file for each environment
 
-key ="wVy6OcHlFrtoI4j03dAPJv7aUl8TzWYTUSxp/gDTNo+sjWWhu2LjwJiH1rVPEida+JASE2xVSHOI+AStfqj89g=="
+key ="<extract this key form keyvault>"
 
 location ="Norway East"
 
