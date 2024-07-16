@@ -1,0 +1,46 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger:
+- main
+
+pool:
+  vmImage: ubuntu-latest
+
+steps:
+- task: TerraformInstaller@1
+  inputs:
+    terraformVersion: 'latest'
+
+- task: TerraformTaskV4@4
+  inputs:
+    provider: 'azurerm'
+    command: 'init'
+    backendServiceArm: 'Accelerate-NO-C23-BESTOS-UNITED(1)(264a89f0-56e0-40ba-8d89-034174fddaab)'
+    backendAzureRmResourceGroupName: 'BESTOS-RG'
+    backendAzureRmStorageAccountName: 'sabestos'
+    backendAzureRmContainerName: 'terraform'
+    backendAzureRmKey: 'terraform.tfstate'
+
+- task: CmdLine@2
+  inputs:
+    script: 'terraform workspace select prod'
+
+- task: TerraformTaskV4@4
+  inputs:
+    provider: 'azurerm'
+    command: 'plan'
+    environmentServiceNameAzureRM: 'Accelerate-NO-C23-BESTOS-UNITED(1)(264a89f0-56e0-40ba-8d89-034174fddaab)'
+
+- task: TerraformTaskV4@4
+  inputs:
+    provider: 'azurerm'
+    command: 'validate'
+
+- task: TerraformTaskV4@4
+  inputs:
+    provider: 'azurerm'
+    command: 'apply'
+    environmentServiceNameAzureRM: 'Accelerate-NO-C23-BESTOS-UNITED(1)(264a89f0-56e0-40ba-8d89-034174fddaab)'

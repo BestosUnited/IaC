@@ -1,0 +1,9 @@
+/.terraform
+/.terraform.lock.hcl
+/.vs
+/hub/.terraform.lock.hcl
+/hub/.terraform
+/terraform.tfstate
+/terraform.tfstate.backup
+/terraform.tfstate.d
+/key.txt
